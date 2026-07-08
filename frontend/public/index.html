@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDev AI - Autonomous Multi-Agent Platform</title>
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #161b26;
+            --border-color: #242b3d;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+        }
+
+        aside {
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+        }
+
+        main {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <h2>AutoDev AI</h2>
+            <p style="color: var(--text-secondary); font-size: 14px;">MCP Multi-Agent Platform</p>
+        </aside>
+        <main>
+            <header>
+                <h1>Orchestrator Workspace</h1>
+                <span class="status-badge">Standby Mode</span>
+            </header>
+            <section>
+                <h3>System Information</h3>
+                <p>Welcome to AutoDev AI. Connect the backend orchestration server to begin executing multi-agent software engineering workloads.</p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

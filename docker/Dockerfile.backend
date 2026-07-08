@@ -1,0 +1,45 @@
+# ==============================================================================
+# AutoDev AI - Backend Dockerfile
+# Multi-stage build for security and performance optimization.
+# ==============================================================================
+
+# Stage 1: Build Dependencies
+FROM python:3.11-alpine AS builder
+
+WORKDIR /build
+
+# Install compilation packages
+RUN apk add --no-cache gcc musl-dev postgresql-dev libffi-dev
+
+# Install python dependencies to local site-packages
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+
+# Stage 2: Runtime Container
+FROM python:3.11-alpine AS runner
+
+WORKDIR /app
+
+# Install postgres client libraries
+RUN apk add --no-cache libpq
+
+# Copy built package dependencies from builder stage
+COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
+
+# Copy backend files and configurations
+COPY backend/ /app/
+COPY config/ /config/
+
+# Environment settings
+ENV PYTHONUNBUFFERED=1
+ENV APP_ENV=production
+
+# Run under standard non-privileged user container security settings
+RUN adduser -D autodev
+USER autodev
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "main.py", "--mode", "production"]
